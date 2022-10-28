@@ -8,8 +8,12 @@ dotenv.config();
 const connection = require("./connection/db.js")
 const PORT = process.env.PORT || 3000;
 
-const router = require('./routes/routes');
-app.use("/api/user", router);
+const user_router = require('./routes/user-routes');
+app.use("/api/user", user_router);
+
+const blog_router = require("./routes/blog-routes");
+app.use("/api/blog", blog_router)
+
 
 
 app.listen(PORT,()=>{
