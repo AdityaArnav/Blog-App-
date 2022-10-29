@@ -33,4 +33,56 @@ if(!blog){
 return res.status(200).json({blog})
 }
 
-module.exports = {getAllBlogs, addBlog}
+const getById = async (req, res, next) =>{
+const blogId = req.params.id;
+let blog;
+try{
+    blog= await Blog.findById(blogId)
+
+}catch(err){
+    console.log(err);
+}
+if(!blog){
+    return res.status(404).json({message: "No Blog Found"});
+}
+return res.status(200).json({blog})
+}
+
+const updateBlog = async (req, res, next) =>{
+    const {title, description, image} = req.body;
+const blogId = req.params.id;
+let blog;
+try{
+    
+    blog = await Blog.findByIdAndUpdate(blogId, {
+        title,
+        description,
+        image
+    })
+
+}catch(err){
+    console.log(err);
+}
+if(!blog){
+    return res.status(500).json({message: "Unable to Update the Blog"})
+}
+return res.status(200).json({blog})
+}
+
+const deleteBlog = async (req, res, next) => {
+    const blogId = req.params.id;
+    let blog;
+    try{
+        blog = await Blog.findByIdAndDelete(blogId)
+    }
+    catch(err){
+        console.log(err);
+    }
+    if(!blog){
+        return res.status(404).json({message: "Unable to Delete blog"})
+    }
+    return res.status(200).json({message:"Blog Deleted Successfully", blog})
+
+}
+
+module.exports = { getAllBlogs, addBlog, getById, updateBlog, deleteBlog }
