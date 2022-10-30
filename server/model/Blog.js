@@ -4,20 +4,20 @@ const Schema = mongoose.Schema;
 const blogSchema = new Schema({
     title: {
         type: String,
-        require: true
+        required: true
     },
     description: {
         type: String,
-        require: true
+        required: true
     },
     image: {
         type: String,
-        require: true
+        required: true
     },
     user: {
         type:mongoose.Types.ObjectId,
         ref: "User",
-        require: true
+        required: true
     }
 });
 

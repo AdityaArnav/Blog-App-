@@ -18,8 +18,8 @@ const userSchema = new Schema({
     },
 
     blogs:[{
-        type:mongoose.Types.ObjectId,
-        ref:"Blogs",
+        type: mongoose.Types.ObjectId,
+        ref: "Blog",
         required: true
     }]
 
