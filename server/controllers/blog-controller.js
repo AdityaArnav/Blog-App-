@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { findOne, findById } = require("../model/Blog");
 const Blog = require("../model/Blog");
 const User = require("../model/User");
 
@@ -101,4 +102,19 @@ const deleteBlog = async (req, res, next) => {
 
 }
 
-module.exports = { getAllBlogs, addBlog, getById, updateBlog, deleteBlog }
+const getByUserId = async (req, res, next)=>{
+    const userId = req.params.id;
+    let userBlogs;
+    try{
+        userBlogs = await User.findById(userId).populate("blogs")
+
+    }catch(err){
+        console.log(err);
+    }
+    if(!userBlogs){
+        return res.status(404).json({message:"No blog found"});
+    }
+    return res.status(200).json({blogs:userBlogs})
+}
+
+module.exports = { getAllBlogs, addBlog, getById, updateBlog, deleteBlog, getByUserId }
