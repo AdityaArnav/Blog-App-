@@ -7,8 +7,12 @@ import Auth from './components/Auth';
 import BlogDetail from './components/BlogDetail';
 import Header from './components/Header';
 import UserBlog from './components/UserBlog';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const isLoggedIn = useSelector(state=> state.isLoggedIn);
+  console.log(isLoggedIn)
+
   return (
     <>
     <header>
